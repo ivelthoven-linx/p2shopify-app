@@ -52,10 +52,9 @@ class Index extends React.Component {
               </TextContainer>
             </Card.Section>
             <Card.Section subdued>
-              <p>
-                <pre>
-                  <code>
-                    {`<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+              <pre>
+                <code>
+                  {`<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
   const products = {
   {% for product in collection.products %}
@@ -122,9 +121,8 @@ style="display: none;max-width:\${img.css("max-width")};max-height:\${img.css(
   });
   console.log("linx loaded");
 </script>`}
-                  </code>
-                </pre>
-              </p>
+                </code>
+              </pre>
             </Card.Section>
           </Card>
           <Card>
@@ -145,11 +143,9 @@ style="display: none;max-width:\${img.css("max-width")};max-height:\${img.css(
               </TextContainer>
             </Card.Section>
             <Card.Section subdued>
-              <p>
-                <pre>
-                  <code />
-                </pre>
-              </p>
+              <pre>
+                <code />
+              </pre>
             </Card.Section>
           </Card>
         </Layout>
