@@ -30,10 +30,6 @@ class Index extends React.Component {
       <Page
         forceRender={true}
         secondaryActions={[{ content: "Report Issue" }]}
-        pagination={{
-          hasPrevious: true,
-          hasNext: true
-        }}
         title="Snippets"
       >
         <Layout sectioned>
