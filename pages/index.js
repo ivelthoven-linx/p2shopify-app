@@ -21,7 +21,7 @@ import {
 } from "@shopify/polaris";
 import React from "react";
 // import { Link } from "@shopify/polaris/types/components/AppProvider/utilities";
-// sdfsssss
+// sdfssssss
 class Index extends React.Component {
   render() {
     return (
