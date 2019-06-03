@@ -28,7 +28,6 @@ class Index extends React.Component {
   render() {
     return (
       <Page
-        // breadcrumbs={[{ content: "Products", url: "/products" }]}
         forceRender={true}
         secondaryActions={[{ content: "Report Issue" }]}
         pagination={{
@@ -38,13 +37,6 @@ class Index extends React.Component {
         title="Snippets"
       >
         <Layout sectioned>
-          {/* <TextContainer spacing="loose">
-            <DisplayText size="medium">Hover-over</DisplayText>
-            <Caption>
-              Collection-template at line{" "}
-              <TextStyle variation="strong">280</TextStyle>
-            </Caption>
-          </TextContainer> */}
           <Card>
             <Card.Header
               actions={[
