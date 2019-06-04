@@ -23,8 +23,10 @@ import {
   Modal
 } from "@shopify/polaris";
 import React from "react";
+
 import ProductCard from "../components/ProductCard";
 import exampleData from "../ExampleData";
+
 class Index extends React.Component {
   constructor(state) {
     super(state);
