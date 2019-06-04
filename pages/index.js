@@ -1,10 +1,6 @@
 import {
-  EmptyState,
-  Layout,
   Page,
-  ResourcePicker,
   Card,
-  TextStyle,
   ResourceList,
   Thumbnail,
   Query,
@@ -23,15 +19,18 @@ import {
   List,
   DropZone,
   FileUpload,
-  Collapsible
+  Collapsible,
+  Modal
 } from "@shopify/polaris";
 import React from "react";
-// import { Link } from "@shopify/polaris/types/components/AppProvider/utilities";
-// 123123eqweqwe
+import ProductCard from "../components/ProductCard";
+import exampleData from "../ExampleData";
 class Index extends React.Component {
   constructor(state) {
     super(state);
     this.state = {
+      modalOpen: true,
+      active: true,
       searchValue: "",
       appliedFilters: [
         {
@@ -52,47 +51,30 @@ class Index extends React.Component {
 
   renderItem = item => {
     const { id, url, name, location } = item;
-    const media = <Avatar customer size="medium" name={name} />;
+    return <ProductCard />;
+  };
 
-    return (
-      <Card>
-        <Card.Header
-          actions={[
-            {
-              content: "-Coming soon-"
-            }
-          ]}
-          title="Multiple Variant Images"
-        />
-        <Collapsible>
-          <Card.Section>
-            <Card />
-          </Card.Section>
-        </Collapsible>
-      </Card>
-    );
+  skur = () => {
+    const variantIdArray = [];
+    for (const i in exampleData) {
+      variantIdArray.push(exampleData[i]["product_id"]);
+    }
+    let variantId = Array.from(new Set(variantIdArray));
+
+    return variantId;
   };
 
   render() {
+    const { active } = this.state;
+
     const resourceName = {
       singular: "customer",
       plural: "customers"
     };
 
-    const items = [
-      {
-        id: 341,
-        url: "customers/341",
-        name: "Mae Jemison",
-        location: "Decatur, USA"
-      },
-      {
-        id: 256,
-        url: "customers/256",
-        name: "Ellen Ochoa",
-        location: "Los Angeles, USA"
-      }
-    ];
+    const items = [{}];
+
+    items.push(this.skur());
 
     const filters = [
       {
@@ -125,10 +107,13 @@ class Index extends React.Component {
     );
 
     return (
-      <Page fullWidthtitle="Ph2Shopify" forceRender>
-        <Stack distribution="trailing">
-          <Button primary>Upload</Button>
-        </Stack>
+      <Page
+        fullWidth
+        title="Ph2Shopify"
+        forceRender
+        primaryAction={{ content: "Upload" }}
+      >
+        <Stack distribution="trailing" />
         <Card sectioned={true}>
           <ResourceList
             resourceName={resourceName}

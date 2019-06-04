@@ -134,9 +134,9 @@ class Index extends React.Component {
                   </Layout>
                 </Card.Section>
                 <Layout>
-                  <Button plain external={true} url="https://phomas.com/">
+                  <Link url="https://help.shopify.com/manual" external>
                     Get more detailed information at phomas.com
-                  </Button>
+                  </Link>
                 </Layout>
               </Card>
             </Layout.Section>
