@@ -28,6 +28,7 @@ import navItems from "../util/navItems";
 import nav from "../util/nav";
 import React from "react";
 import SubNav from "../components/SubNav";
+import CodeCard from "../components/CodeCard";
 
 class Index extends React.Component {
   state = {
@@ -41,6 +42,7 @@ class Index extends React.Component {
   render() {
     return (
       <Page
+        // fullWidth
         forceRender={true}
         secondaryActions={[{ content: "Report Issue" }]}
         title="Snippets"
@@ -59,13 +61,9 @@ class Index extends React.Component {
               For our Javascript code to work we need Jquery. Add this snippet
               to head of html/liquid file.
             </p>
-            <Card sectioned subdued>
-              <pre>
-                <code>
-                  {`<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>`}
-                </code>
-              </pre>
-            </Card>
+            <CodeCard>
+              {`<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>`}
+            </CodeCard>
             <Heading>Adding Hover-over Effect</Heading>
             <p>
               This following code gets all images for the products on this page
@@ -76,79 +74,75 @@ class Index extends React.Component {
               <br /> Add the following code to collection-template.liquid at the
               end.
             </p>
-            <Card sectioned subdued>
-              <pre>
-                <code>
-                  {`
-  <script type="text/javascript">
-    const products = {
-    {% for product in collection.products %}
-      {{product.id}} : { 
-      images: [
-      {% for image in product.images %}
-      {% assign just_url = image | img_url %}
-        {% assign url_pieces = just_url | split: "/" %}
-          {% assign url_pieces_size = url_pieces | size | minus: 1 %}
-        '{{just_url}}',
-      {% endfor %}
-      ]
-      },
+            <CodeCard>
+              {`
+<script type="text/javascript">
+  const products = {
+  {% for product in collection.products %}
+    {{product.id}} : { 
+    images: [
+    {% for image in product.images %}
+    {% assign just_url = image | img_url %}
+      {% assign url_pieces = just_url | split: "/" %}
+        {% assign url_pieces_size = url_pieces | size | minus: 1 %}
+      '{{just_url}}',
     {% endfor %}
-        };
-    console.log(products);
+    ]
+    },
+  {% endfor %}
+      };
+  console.log(products);
+  
+  const wrappers = $(".grid-view-item");
+  wrappers.each(i => {
+    const wrapper = $(wrappers[i]);
+    const img = wrapper.find(".product-card__image-wrapper img");
+    const classes = img.attr("class")
+//     const productId = "gid://shopify/Product/" + img.data("linx-app-prod-id")
     
-    const wrappers = $(".grid-view-item");
-    wrappers.each(i => {
-      const wrapper = $(wrappers[i]);
-      const img = wrapper.find(".product-card__image-wrapper img");
-      const classes = img.attr("class")
-  //     const productId = "gid://shopify/Product/" + img.data("linx-app-prod-id")
-      
-      //$.get(\`https://lx3ip.sse.codesandbox.io/check/hover?product_id=\${productId}\`, function(data) {
-      
-      const data = products[img.data("linx-app-prod-id")];
-      //console.log(data);
-      const hoverUrl = data.images.find((elm)=> { return elm.includes('hover') });
-      
-        if (hoverUrl) {
-          img.before(\`<img 
-        id="linx_app_hover_\${img.data("linx-app-prod-id")}"
-            class="\${classes}" 
-  style="display: none;max-width:\${img.css("max-width")};max-height:\${img.css(
-                        "max-height"
-                      )};"
-            src="\${hoverUrl}"
-        size="250px"
-        data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"	
-        data-sizes="auto" 
-      >\`);
-            
-      
-          const img2 = $(\`#linx_app_hover_\${img.data("linx-app-prod-id")}\`);
-          let active = false;
-          wrapper.mouseover(function() {
-            if (!active) {
-              active = true;
-              img.fadeOut("slow");
-              img2.fadeIn("slow",function() {
-                active=false
-              })
-            }});
-          wrapper.mouseout(function() {
-            img2.fadeOut("slow", function() {
-              console.log(img2);
-  //               img2.style.display = 'none';
-              });
-            img.fadeIn("slow");
-          });
-        }
-      //});
-    });
-    console.log("linx loaded");
-  </script>`}
-                </code>
-              </pre>
-            </Card>
+    //$.get(\`https://lx3ip.sse.codesandbox.io/check/hover?product_id=\${productId}\`, function(data) {
+    
+    const data = products[img.data("linx-app-prod-id")];
+    //console.log(data);
+    const hoverUrl = data.images.find((elm)=> { return elm.includes('hover') });
+    
+      if (hoverUrl) {
+        img.before(\`<img 
+      id="linx_app_hover_\${img.data("linx-app-prod-id")}"
+          class="\${classes}" 
+style="display: none;max-width:\${img.css("max-width")};max-height:\${img.css(
+                      "max-height"
+                    )};"
+          src="\${hoverUrl}"
+      size="250px"
+      data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"	
+      data-sizes="auto" 
+    >\`);
+          
+    
+        const img2 = $(\`#linx_app_hover_\${img.data("linx-app-prod-id")}\`);
+        let active = false;
+        wrapper.mouseover(function() {
+          if (!active) {
+            active = true;
+            img.fadeOut("slow");
+            img2.fadeIn("slow",function() {
+              active=false
+            })
+          }});
+        wrapper.mouseout(function() {
+          img2.fadeOut("slow", function() {
+            console.log(img2);
+//               img2.style.display = 'none';
+            });
+          img.fadeIn("slow");
+        });
+      }
+    //});
+  });
+  console.log("linx loaded");
+</script>`}
+            </CodeCard>
           </TextContainer>{" "}
         </SubNav>
       </Page>

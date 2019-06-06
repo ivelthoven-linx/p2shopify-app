@@ -1,16 +1,9 @@
+import React from "react";
 import {
-  EmptyState,
   Layout,
   Page,
-  ResourcePicker,
   Card,
-  TextStyle,
-  ResourceList,
   Thumbnail,
-  Query,
-  TopBar,
-  FilterType,
-  Avatar,
   Heading,
   Link,
   DisplayText,
@@ -21,16 +14,19 @@ import {
   Caption,
   Banner,
   List,
-  DropZone,
-  FileUpload
+  DropZone
 } from "@shopify/polaris";
-import React from "react";
-// import { Link } from "@shopify/polaris/types/components/AppProvider/utilities";
-// 123123eqweqwe
-class Index extends React.Component {
+
+class Information extends React.Component {
   constructor(state) {
     super(state);
-    this.state = { state: 0, files: [], rejectedFiles: [], hasError: false };
+    this.state = {
+      state: 0,
+      files: [],
+      rejectedFiles: [],
+      hasError: false,
+      isFirst: this.props.isFirst
+    };
   }
 
   render() {
@@ -85,11 +81,11 @@ class Index extends React.Component {
                     <Stack.Item>
                       <div style={{ height: "100px" }}>
                         <Pagination
-                          hasPrevious
-                          previousKeys={[74]}
-                          onPrevious={() => {
-                            console.log("Previous");
-                          }}
+                          // hasPrevious
+                          // previousKeys={[74]}
+                          // onPrevious={() => {
+                          //   console.log("Previous");
+                          // }}
                           hasNext
                           nextKeys={[75]}
                           onNext={() => {
@@ -248,7 +244,9 @@ class Index extends React.Component {
                     <br />
                   </TextContainer>
                   <Layout>
-                    <Button plain>Get the code snippets</Button>
+                    <Link url="/snippets" external>
+                      See code snippets
+                    </Link>
                   </Layout>
                   {/* -------------------------------- */}
                 </Card.Section>
@@ -278,8 +276,8 @@ class Index extends React.Component {
                           onPrevious={() => {
                             this.setState({ state: 1 });
                           }}
-                          hasNext
-                          nextKeys={[75]}
+                          // hasNext
+                          // nextKeys={[75]}
                           onNext={() => {
                             this.setState({ state: 2 });
                           }}
@@ -335,31 +333,47 @@ class Index extends React.Component {
                       </p>
                     </Layout>
                   </TextContainer>
-                  <br />
-                  <br />
-                  {/* -------------------------------- */}
-                  <Stack vertical>
-                    {errorMessage}
-                    <DropZone
-                      accept="image/*"
-                      type="image"
-                      onDrop={(files, acceptedFiles, rejectedFiles) => {
-                        this.setState({
-                          files: [...this.state.files, ...acceptedFiles],
-                          rejectedFiles: rejectedFiles,
-                          hasError: rejectedFiles.length > 0
-                        });
-                      }}
-                    >
-                      {uploadedFiles}
-                      {fileUpload}
-                    </DropZone>
-                    <br />
-                    <Layout>
-                      <Button primary>Submit</Button>
-                    </Layout>
-                  </Stack>
-
+                  {/* ------------------------------------ */}
+                  {this.state.isFirst && (
+                    <div>
+                      <br />
+                      <hr />
+                      <br />
+                      <TextContainer spacing="loose">
+                        <Layout section={true}>
+                          <Stack alignment="center">
+                            <Layout.Section>
+                              <Heading element="h1">
+                                Upload your first image!
+                              </Heading>
+                            </Layout.Section>
+                          </Stack>
+                        </Layout>
+                      </TextContainer>
+                      <br />
+                      <Stack vertical>
+                        {errorMessage}
+                        <DropZone
+                          accept="image/*"
+                          type="image"
+                          onDrop={(files, acceptedFiles, rejectedFiles) => {
+                            this.setState({
+                              files: [...this.state.files, ...acceptedFiles],
+                              rejectedFiles: rejectedFiles,
+                              hasError: rejectedFiles.length > 0
+                            });
+                          }}
+                        >
+                          {uploadedFiles}
+                          {fileUpload}
+                        </DropZone>
+                        <br />
+                        <Layout>
+                          <Button primary>Submit</Button>
+                        </Layout>
+                      </Stack>
+                    </div>
+                  )}
                   {/* -------------------------------- */}
                 </Card.Section>
               </Card>
@@ -370,4 +384,5 @@ class Index extends React.Component {
     }
   }
 }
-export default Index;
+
+export default Information;

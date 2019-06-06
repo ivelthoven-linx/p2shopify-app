@@ -23,9 +23,10 @@ import {
   Modal
 } from "@shopify/polaris";
 import React from "react";
-
+// sdf
 import ProductCard from "../components/ProductCard";
 import exampleData from "../ExampleData";
+import Information from "../components/Information";
 
 class Index extends React.Component {
   constructor(state) {
@@ -34,6 +35,7 @@ class Index extends React.Component {
       modalOpen: true,
       active: true,
       searchValue: "",
+      isFirst: true,
       appliedFilters: [
         {
           key: "accountStatusFilter",
@@ -107,24 +109,29 @@ class Index extends React.Component {
       />
     );
 
-    return (
-      <Page
-        fullWidth
-        title="ph2shopify"
-        forceRender
-        primaryAction={{ content: "Upload" }}
-      >
-        <br />
-        <Card sectioned={true}>
-          <ResourceList
-            resourceName={resourceName}
-            items={exampleData["products"]}
-            renderItem={this.renderItem}
-            filterControl={filterControl}
-          />
-        </Card>
-      </Page>
-    );
+    if (this.state.isFirst) {
+      return <Information isFirst={true} />;
+    } else {
+      return (
+        <Page
+          fullWidth
+          title="ph2shopify"
+          forceRender
+          primaryAction={{ content: "Upload" }}
+        >
+          <br />
+          <Card sectioned={true}>
+            <ResourceList
+              resourceName={resourceName}
+              items={exampleData["products"]}
+              renderItem={this.renderItem}
+              filterControl={filterControl}
+            />
+          </Card>
+        </Page>
+      );
+    }
+
   }
 }
 export default Index;

@@ -1,5 +1,5 @@
 {
-  "name": "p2shopify-app-git-master",
+  "name": "p2shopify-app-git-20",
   "version": "1.0.0",
   "scripts": {
     "dev": "node server.js",
