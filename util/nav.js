@@ -10,7 +10,7 @@ exports.getSelectedItems = (url, items) => {
       }
       return item;
     });
-    console.log(map);
+    // console.log(map);
     return map;
   }
 };
