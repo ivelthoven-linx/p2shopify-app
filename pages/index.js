@@ -51,20 +51,19 @@ class Index extends React.Component {
     this.setState({ appliedFilters });
   };
 
-  renderItem = item => {
-    const { id, url, name, location } = item;
-    return <ProductCard />;
+  renderItem = product => {
+    return <ProductCard productData={product} />;
   };
 
-  skur = () => {
-    const variantIdArray = [];
-    for (const i in exampleData) {
-      variantIdArray.push(exampleData[i]["product_id"]);
-    }
-    let variantId = Array.from(new Set(variantIdArray));
+  // skur = () => {
+  //   const variantIdArray = [];
+  //   for (const i in exampleData) {
+  //     variantIdArray.push(exampleData[i]["product_id"]);
+  //   }
+  //   let variantId = Array.from(new Set(variantIdArray));
 
-    return variantId;
-  };
+  //   return variantId;
+  // };
 
   render() {
     const { active } = this.state;
@@ -74,9 +73,9 @@ class Index extends React.Component {
       plural: "customers"
     };
 
-    const items = [{}];
+    // const items = [{}];
 
-    items.push(this.skur());
+    // items.push(this.skur());
 
     const filters = [
       {
@@ -111,15 +110,15 @@ class Index extends React.Component {
     return (
       <Page
         fullWidth
-        title="Ph2Shopify"
+        title="ph2shopify"
         forceRender
         primaryAction={{ content: "Upload" }}
       >
-        <Stack distribution="trailing" />
+        <br />
         <Card sectioned={true}>
           <ResourceList
             resourceName={resourceName}
-            items={items}
+            items={exampleData["products"]}
             renderItem={this.renderItem}
             filterControl={filterControl}
           />
